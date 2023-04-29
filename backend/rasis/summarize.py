@@ -37,7 +37,9 @@ def ask():
     for rawResultItem in rawResultList:
         if (rawResultItem):
             resultList.append(rawResultItem.strip())
-    print(resultList)
+    
+    for r in resultList:
+        print('- ' + r)
 
     sampleDict = {
         "success": "true",
