@@ -7,8 +7,6 @@ from langchain import PromptTemplate
 from langchain import LLMChain
 
 api_key = os.environ['OPENAI_API_KEY']
-template = """Summarize this page {pageUrl} in bullets"""
-
 davinci = OpenAI(model_name='text-davinci-003', openai_api_key=api_key)
 
 app = Flask(__name__)
@@ -20,6 +18,8 @@ def ask():
     print(reqJson)
     print("Page url: " + reqJson['pageUrl'])
 
+    # AI prompt
+    template = """Summarize this page {pageUrl} in bullets"""
     prompt = PromptTemplate(
         template=template,
         input_variables=['pageUrl']
@@ -28,7 +28,6 @@ def ask():
         prompt=prompt,
         llm=davinci
     )
-
     result = llm_chain.run(reqJson['pageUrl'])
 
     # Parse result and summarize
@@ -37,12 +36,13 @@ def ask():
     for rawResultItem in rawResultList:
         if (rawResultItem):
             resultList.append(rawResultItem.strip())
-    
+
     for r in resultList:
         print('- ' + r)
 
     sampleDict = {
         "success": "true",
+        "message": "",
         "hotel": "trivago",
         "pageUrl": reqJson['pageUrl'],
         "factList": resultList
