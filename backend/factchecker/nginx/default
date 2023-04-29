@@ -53,7 +53,7 @@ server {
 }
 
 server {
-        listen 80812 default_server;
+        listen 8082 default_server;
         listen [::]:8082 default_server;
 
         server_name _;
