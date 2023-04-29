@@ -6,7 +6,7 @@ After=network.target
 User=ai133
 Group=www-data
 WorkingDirectory=/home/ai133/factchecker
-ExecStart=/home/ai133/.local/bin/uwsgi --ini factchecker.ini
+ExecStart=/home/ai133/.local/bin/uwsgi --ini /home/ai133/one-three-three-factchecker/backend/factchecker/factchecker.ini
 
 [Install]
 WantedBy=multi-user.target
