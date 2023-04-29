@@ -69,6 +69,6 @@ server {
         server_name _;
         location / {
             include uwsgi_params;
-            uwsgi_pass unix:/home/ai133/factchecker/factchecker.sock;
+            uwsgi_pass unix:/home/ai133/one-three-three-factchecker/backend/factchecker/factchecker.sock;
         }
 }
