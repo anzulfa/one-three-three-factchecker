@@ -1,13 +1,13 @@
 [Unit]
-Description=uWSGI instance to serve fact checker service (python)
+Description=uWSGI instance to serve 133 fact checker service (python)
 After=network.target
 
 [Service]
 User=ai133
 Group=www-data
-WorkingDirectory=/home/ai133/factchecker
-ExecStart=/home/ai133/.local/bin/uwsgi --ini /home/ai133/one-three-three-factchecker/backend/factchecker/factchecker.ini
+WorkingDirectory=/home/ai133/one-three-three-factchecker/backend/factchecker
+Environment="OPENAI_API_KEY=xxxx"
+ExecStart=/home/ai133/.local/bin/uwsgi --ini factchecker.ini
 
 [Install]
 WantedBy=multi-user.target
-
