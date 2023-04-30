@@ -1,7 +1,7 @@
 {
-    "name": "OTT Fact Checker",
+    "name": "Period! Fact-Checker",
     "version": "1.0.0",
-    "description": "determina whether this page is a fact or a hoax",
+    "description": "determine whether this page is a fact or a hoax",
     "manifest_version": 3,
     "author": "One Three Three",
     "action":{
