@@ -6,11 +6,12 @@ body {
     background-image: linear-gradient(to bottom right, rgb(178, 229, 247, 0.2), white);
 }
 
-main {
+.main {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
     width: 375px;
+    padding: 5px 8px;
 }
 
 .title {
@@ -25,7 +26,7 @@ main {
 .desc {
     display: flex;
     flex-direction: row;
-    margin: 5px 10px 5px 20px;
+    margin: 5px 0;
     padding-left: 10px;
     background-color: rgb(178, 229, 247, 0.5);
     vertical-align: middle;
@@ -47,7 +48,7 @@ main {
     margin: -3px 0px;
 }
 
-.loader-container {
+#loader-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -71,4 +72,58 @@ main {
 
 .loader-text {
     font-size: 14px;
+}
+
+.naming {
+    font-weight: 900;
+}
+
+#result-container {
+    display: none;
+    text-align: left;
+    padding: 0px 10px;
+    font-size: 16px;
+    margin-top: 10px;
+
+}
+
+.result-title {
+    font-weight: 900;
+    font-size: 20px;
+}
+
+.grade-correct, .grade-incorrect {
+    display: none;
+}
+
+.result-content {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}
+
+.partial {
+  width: 20px;
+  height: 20px;
+  background: linear-gradient( -45deg, rgb(255, 108, 108), rgb(255, 108, 108) 49%, white 49%, white 51%, rgb(144, 247, 144) 51% ); 
+  border-radius: 50%;
+}
+
+.partial, .grade-correct, .grade-incorrect, .correct, .incorrect {
+    margin-right: 10px;
+    margin-top: 2px;
+}
+
+.correct {
+    width: 20px;
+    height: 20px;
+    background: rgb(144, 247, 144); 
+    border-radius: 50%;
+}
+
+.incorrect {
+    width: 20px;
+    height: 20px;
+    background: rgb(255, 108, 108); 
+    border-radius: 50%;
 }

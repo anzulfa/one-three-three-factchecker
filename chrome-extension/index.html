@@ -14,12 +14,12 @@
                 <img src="resources/loupe.png" width="28" height="28">
             </div>
             <div class="desc-txt">
-                <p class="">OTT Fact-Checker will help you verify the accuracy and credibility of article in this page.</p>
+                <p class=""><span class="naming">Period!</span> Fact-Checker will help you verify the accuracy and credibility of article in this page.</p>
             </div>
 
         </div>
         
-        <div class="loader-container">
+        <div id="loader-container">
             <div class="loader">
     
             </div>
@@ -27,7 +27,38 @@
                 Facts analyzing...
             </div>
         </div>
-        <p id="result"></p>
+
+        <div id="result-container">
+
+            <div class="result-content">
+                <div class="partial"></div>
+                <div class="grade-correct"></div>
+                <div class="grade-incorrect"></div>
+                <div>
+                    This article is <span id="result-grade"></span>. 
+                </div>
+            </div>
+            <div class="result-content">
+                <div class="correct"></div>
+                <div>
+                    Accurate points from this article:
+                    <ol>
+                        <span id="result-accurate"></span>
+                    </ol>
+                </div>
+            </div>
+            <div class="result-content">
+                <div class="incorrect"></div>
+                <div>
+                    Inccurate points from this article:
+                    <ol>
+                        <span id="result-inaccurate"></span>
+                    </ol>
+                </div>
+            </div>
+
+        </div>
+
     </main>
 </body>
 <script src="script.js"></script>
