@@ -44,7 +44,7 @@ def ask():
     sampleDict = {
         "success": "true",
         "message": "",
-        "hotel": "trivago",
+        "hotel": "traveloka",
         "pageUrl": reqJson['pageUrl'],
         "factList": resultList
     }
