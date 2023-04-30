@@ -16,8 +16,8 @@ body {
 
 .title {
     text-align: center;
-    color: rgb(0, 187, 255);
-    font-size: 20px;
+    color: rgb(0, 60, 188);
+    font-size: 22px;
     font-weight: bold;
     margin-top: 5px;
     margin-bottom: 5px;
@@ -52,6 +52,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    vertical-align: middle;
 }
 
 .loader {
@@ -76,11 +77,11 @@ body {
 
 .naming {
     font-weight: 900;
+    color:rgb(0, 60, 188)
 }
 
 #result-container {
     display: none;
-    text-align: left;
     padding: 0px 10px;
     font-size: 16px;
     margin-top: 10px;
@@ -102,28 +103,89 @@ body {
     margin-top: 20px;
 }
 
-.partial {
-  width: 20px;
-  height: 20px;
-  background: linear-gradient( -45deg, rgb(255, 108, 108), rgb(255, 108, 108) 49%, white 49%, white 51%, rgb(144, 247, 144) 51% ); 
-  border-radius: 50%;
+#result-final {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: bold;
 }
 
-.partial, .grade-correct, .grade-incorrect, .correct, .incorrect {
-    margin-right: 10px;
-    margin-top: 2px;
+#result-summary {
+    text-align: justify;
+    margin-top: 10px;
 }
 
-.correct {
-    width: 20px;
-    height: 20px;
-    background: rgb(144, 247, 144); 
-    border-radius: 50%;
+.result-process-chain {
+    margin-top: 25px;
 }
 
-.incorrect {
-    width: 20px;
-    height: 20px;
-    background: rgb(255, 108, 108); 
-    border-radius: 50%;
+/* score */
+.pie-container {
+    display: flex;
+    justify-content: center;
+}
+
+@property --p{
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 1;
+  }
+  
+  .pie {
+    --p:20;      /* the percentage */
+    --b:22px;    /* the thickness */
+    --c:darkred; /* the color */
+    --w:150px;   /* the size*/
+    
+    width:var(--w);
+    aspect-ratio:1/1;
+    position:relative;
+    display:inline-grid;
+    margin:5px;
+    place-content:center;
+    font-size:25px;
+    font-weight:bold;
+    font-family:sans-serif;
+  }
+  .pie:before,
+  .pie:after {
+    content:"";
+    position:absolute;
+    border-radius:50%;
+  }
+  .pie:before {
+    inset:0;
+    background:
+      radial-gradient(farthest-side,var(--c) 98%,#0000) top/var(--b) var(--b) no-repeat,
+      conic-gradient(var(--c) calc(var(--p)*1%),#0000 0);
+    -webkit-mask:radial-gradient(farthest-side,#0000 calc(99% - var(--b)),#000 calc(100% - var(--b)));
+            mask:radial-gradient(farthest-side,#0000 calc(99% - var(--b)),#000 calc(100% - var(--b)));
+  }
+  .pie:after {
+    inset:calc(50% - var(--b)/2);
+    background:var(--c);
+    transform:rotate(calc(var(--p)*3.6deg - 90deg)) translate(calc(var(--w)/2 - 50%));
+  }
+  .animate {
+    animation:p 1s .5s both;
+  }
+  .no-round:before {
+    background-size:0 0,auto;
+  }
+  .no-round:after {
+    content:none;
+  }
+  @keyframes p{
+    from{--p:0;}
+  }
+
+/* end of score */
+
+.font-bold {
+    font-weight: bold;
+}
+
+.no-margin {
+    margin: 0px;
 }
