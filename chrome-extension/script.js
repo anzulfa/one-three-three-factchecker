@@ -18,14 +18,15 @@ async function fetchData(pageUrl) {
 function displayResult(response) {
     var score = parseInt(response.result.score)
     var pie = document.getElementById("pie-score")
-    pie.style.setProperty('--p', score == 0 ? 5 : score)
-    pie.style.setProperty('--c', score == 100 ? "rgb(144, 247, 144)" : (score > 0 ? "rgb(255, 236, 113)" : "gb(255, 108, 108)"))
+    pie.style.setProperty('--p', score <= 0 ? 3 : score)
+    pie.style.setProperty('--c', score == 100 ? "rgb(144, 247, 144)" : (score > 0 ? "rgb(255, 236, 113)" : "rgb(255, 108, 108)"))
 
     document.getElementById("loader-container").style.display = "none"
     document.getElementById("result-container").style.display = "block"
     document.getElementById("result-score").innerHTML = score.toString().concat('%')
     document.getElementById("result-final").style.color = score == 100 ? "#48b31b" : (score > 0 ? "#d6a11a" : "darkred");
-    document.getElementById("result-grade").innerHTML = score == 100 ? "correct" : (score > 0 ? "partially Correct" : "incorrect"); 
+    document.getElementById("result-grade").innerHTML = score == 100 ? "correct" : 
+        (score > 0 ? "partially Correct" : "either incorrect or not available for facts analysis"); 
     document.getElementById("result-summary").innerHTML = response.result.summary;
 
     var processChainList = document.getElementById("result-process-chain-list")
