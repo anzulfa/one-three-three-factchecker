@@ -22,16 +22,16 @@ serpapi_api_key = os.environ['SERPAPI_API_KEY']
 # Pre-compiled variable
 ansi_escape = re.compile(r'(?:\x1B[@-_]|[\x80-\x9F])[0-?]*[ -/]*[@-~]')
 prompt_factcheck = '''
-    You are a professional article fact checker. 
-    Can you fact check this article: "{url}"
-    Perform the fact check by listing down the "factual" statements that the article author claim to be true into bullet points, and present this points.
-    Then for each point, find out whether they are true by cross checking with other websites.
-    Finally, present the end result by giving a verdict for each point whether they are true or not, and also present the website used for the cross check.
-    '''
+You are a professional article fact checker. 
+Can you fact check this article: "{url}"
+Perform the fact check by listing down the "factual" statements that the article author claim to be true into bullet points, and present this points.
+Then for each point, find out whether they are true by cross checking with other websites.
+Finally, present the end result by giving a verdict for each point whether they are true or not, and also present the website used for the cross check.
+'''
 prompt_score = ''' You are an article scorer. An article fact checker gave his review on this article:
-    "{article_final}" from url {url} 
-    in a score of 1-100, how would you score this article based on its correctness?
-    '''
+"{article_final}"
+in a score of 1-100, how would you score this article based on its correctness? Please add 'Period!' at the end of your answer.
+'''
 
 @app.route("/check-fact", methods=['POST'])
 def ask():
@@ -41,7 +41,7 @@ def ask():
 
     # Call OpenAI for inference
     llm = OpenAI(temperature=0, model_name = 'gpt-3.5-turbo', openai_api_key=openai_api_key)
-    tools = load_tools(["serpapi", "llm-math"], llm=llm,serpapi_api_key=serpapi_api_key)
+    tools = load_tools(["serpapi", "llm-math"], llm=llm, serpapi_api_key=serpapi_api_key)
     agent = initialize_agent(tools, llm, agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION, verbose=True)
     # agent = initialize_agent(tools, llm, verbose=True)
 
@@ -50,7 +50,8 @@ def ask():
     article_final = None
     with contextlib.redirect_stdout(captured_output):
         article_final = agent.run(prompt_factcheck.format(url = reqJson['pageUrl']))
-        score_final = llm(prompt_score.format(article_final = article_final, url = reqJson['pageUrl']))
+        score_llm = OpenAI(temperature=0)
+        score_final = score_llm(prompt_score.format(article_final = article_final, url = reqJson['pageUrl']))
     agent_run_result = captured_output.getvalue()
     agent_run_result = ansi_escape.sub('', agent_run_result)
 
@@ -96,7 +97,7 @@ def extract_process_chain(text_input):
         observation = re.search('Observation:(.*)Thought', res).group(1)
         thought = re.search('Thought:(.*)', res).group(1)
         final_result_list.append({ 'id': r, 'observation': observation, 'thought': thought })
-        
+
     return final_result_list
 
 if __name__ == '__main__':
