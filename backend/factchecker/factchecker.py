@@ -62,7 +62,7 @@ def ask():
     resultDict = {
         "shortSummary": article_final,
         "summary": article_final,
-        "score": "",
+        "score": int(re.findall("\d+", score_final)[0]),
         "processChain": extract_process_chain(agent_run_result)
     }
 
